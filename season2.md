@@ -67,3 +67,23 @@ The third category encompasses fees for importing, creating outgoing messages, a
 Designing smart contracts requires careful consideration of gas and rent payments to prevent issues like running out of gas or being frozen due to depleted rent. Decentralized apps can rely on users topping up contract balances. Additionally, by placing gas and execution costs on senders, you can ensure an upper bound on execution costs, with excess funds returned in a separate message.
 
 To enhance user experience, a common pattern involves sending excess coins back to the sender's address. Finally, designing contracts with a constant cost in terms of storage and computation enhances predictability and mitigates the risk of entering inconsistent states or running out of funds."
+
+Certainly! Here's a rephrased version:
+
+Let's delve into contracts and discuss scalability. In the initial chapter, we touched upon the concept of infinite horizontal scalability within the entire TON blockchain. However, it's crucial to understand the practical implications of this scalability and how you can leverage it in your applications.
+
+In the TON blockchain, scalability is guaranteed down to the granularity of individual contracts. This means that if you have two distinct accounts, they could potentially exist in separate shard chains operated by independent consensus groups. Consequently, operations on one contract won't impede operations on another. The TON Network manages the message routing between them.
+
+It's essential to note that TON provides a specific guarantee on scalability at the contract level. While it ensures scalability at this level, it doesn't offer tools within the code and data of your application to make your contracts more scalable. Therefore, the responsibility falls on you to optimize for the entire scalability of the blockchain and prevent bottlenecks in your contracts.
+
+Now, let's address potential challenges in designing your application. One common pitfall is designing contracts similarly to monolithic applications with variable-length storage, as seen in traditional systems or Ethereum. For instance, Ethereum implements tokens as a banking ledger within a single smart contract, leading to scalability issues.
+
+In TON, this approach won't scale. Placing a lengthy list in a single contract results in growing rent costs for stored data, making it challenging to distribute this cost among users. Moreover, transaction fees increase for users operating on larger amounts of data in the contract.
+
+To address this, guidelines are provided for designing multi-user and large-scale applications in TON. First, prioritize avoiding variable-length data for constant storage and predictable operation costs. If a list is necessary, keep it short and bounded. For dynamically growing lists, ensure the contract is owned by a single user with exclusive control.
+
+A scalable approach involves using the blockchain itself as an array. For example, in a decentralized exchange, individual contract instances can be created for each user to track balances. This decentralizes internal storage into a scalable array of contracts, keeping the central contract a constant size.
+
+A notable example is the design of tokens in the TON ecosystem. Rather than a single contract storing a list of all users, a minor contract authorizes the minting of tokens for users. Balances are maintained in separate contracts (jeton wallets), tied to users' wallets. These contracts collaborate through messages, ensuring scalability without bottlenecks.
+
+In summary, a successful, scalable application in TON involves contracts with constant storage and operating costs. This leads to predictable rent and gas costs for users, enabling seamless integration with other contracts. Predictability ensures user satisfaction, making your application successful and scalable to millions. In the upcoming lesson, we'll explore specific instances where these principles are implemented.
