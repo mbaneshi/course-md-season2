@@ -51,3 +51,19 @@ The third authentication method builds upon the message sender concept by utiliz
 Lastly, the fourth type of authentication emphasizes the deliberate lack of authentication. In certain scenarios, not authenticating messages becomes a security measure. For instance, in a decentralized staking pool requiring censorship resistance, a message handler could forego authentication, allowing anyone to trigger the message while incorporating other protective measures.
 
 In summary, TON employs four authentication types: external signature-based authentication, internal authentication by message sender, DNA checks for code/data verification, and intentional lack of authentication for specific use cases requiring censorship resistance. Each method serves distinct purposes in building secure and flexible decentralized applications.
+
+Certainly, here's a more polished and professionally rephrased version:
+
+"The Telegram Open Network (TON) is a complex system, with its model of transaction costs and fees standing out as particularly intricate. In this exploration, we delve into the significance of understanding these fees. TON, being a public network, is susceptible to attacks by any party. Consequently, safeguarding this shared resource from denial-of-service attacks requires careful consideration of any non-trivial costs borne by participants.
+
+Within TON, three primary fee categories exist: gas costs, rent, and message fees. Gas costs, originating from Ethereum, represent the computation platform's fuel for executing code. Adjusting gas prices in response to fluctuations in the TON coin's value ensures that the real cost of execution is reflected.
+
+TON differs from Ethereum and Bitcoin by not imposing a market for the scarce gas or block size. Instead, it scales infinitely, allowing validators to earn higher fees during periods of increased network load. Mechanically, the TON Virtual Machine (TVM) checks each instruction for correctness during code execution, reducing the sender's balance by the gas cost incurred.
+
+The second cost category is rent, defined as the cost per bit of data stored by a contract per second. Rent is charged when a transaction begins, based on the contract's storage size and the time since the previous transaction.
+
+The third category encompasses fees for importing, creating outgoing messages, and updating contract storage. These fees, applied per message or byte, play a role in the action phase when contracts create outgoing messages.
+
+Designing smart contracts requires careful consideration of gas and rent payments to prevent issues like running out of gas or being frozen due to depleted rent. Decentralized apps can rely on users topping up contract balances. Additionally, by placing gas and execution costs on senders, you can ensure an upper bound on execution costs, with excess funds returned in a separate message.
+
+To enhance user experience, a common pattern involves sending excess coins back to the sender's address. Finally, designing contracts with a constant cost in terms of storage and computation enhances predictability and mitigates the risk of entering inconsistent states or running out of funds."
